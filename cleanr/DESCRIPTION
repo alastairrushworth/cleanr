@@ -1,0 +1,8 @@
+Package: cleanr
+Title: Explore and Preprocess Data Frames
+Version: 0.1
+Authors@R: person("Alastair", "Rushworth", email = "alastairmrushworth@gmail.com",
+                  role = c("aut", "cre"))
+Description: Tools to explore large and messy data frames.  
+Depends: R (>= 3.1.0), corrr, crayon, dplyr, magrittr, pryr, tibble, tidyr, stringr
+License: GPL-2
