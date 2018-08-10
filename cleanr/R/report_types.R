@@ -19,6 +19,8 @@ report_types <- function(df){
     arrange(desc(prop))         %>% 
     filter(prop > 0)            %>%
     dot_bars_composition 
+  
+  # invisibly return the df for further summaries
   invisible(df)
 }
 
