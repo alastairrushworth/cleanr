@@ -11,6 +11,7 @@ report_na <- function(df){
   if(ncol(na_df) > 0){
     vec_to_tibble(apply(df, 2, function(v) sum(is.na(v)))) %>%
       mutate(prop = n / nrow(df)) %>%
+      slice(1:10) %>%
       dot_bars_na
   } else {
     cat(silver("    << Not applicable >>\n"))
