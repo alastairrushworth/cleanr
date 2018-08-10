@@ -1,6 +1,6 @@
 dot_bars_na <- function(sdf, text = ""){
-  sdf %<>% filter(prop > 0) %>%  arrange(desc(prop))
-  perc <- str_pad(paste(round(sdf$prop * 100, 0), "% ", sep = ""), width = 4, side = "right", pad = " ")
+  perc_vals  <- paste(round(sdf$prop * 100, 0), "% ", sep = "")
+  perc       <- str_pad(perc_vals, width = max(nchar(perc_vals)), side = "left", pad = " ")
   total_bars <- 30 
   nbars      <- round(sdf$prop * total_bars, 0)
   nbars_c    <- 30 - nbars  
@@ -11,7 +11,7 @@ dot_bars_na <- function(sdf, text = ""){
   
   # table header
   bar_text   <- str_pad("% column missing", width = 30, pad = " ", side = "both")
-  perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
+  perc_text  <- str_pad("(%)", width = max(nchar(perc_vals)) - 1, pad = " ", side = "left")
   num_text   <- "Column"
   cat(paste("     ", bar_text, " "), perc_text, num_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
   
@@ -79,28 +79,27 @@ dot_bars_space <- function(sdf, text = ""){
 dot_bars_imbalance <- function(sdf, text = ""){
   total_bars <- 30 
   nbars      <- round(abs(sdf$prop) * total_bars, 0)
-  perc       <- str_pad(paste(round(sdf$prop * 100, 0), "% ", sep = ""), width = 4, side = "right", pad = " ")
+  perc_vals  <- paste(round(sdf$prop * 100, 0), "% ", sep = "")
+  perc       <- str_pad(perc_vals, width = max(nchar(perc_vals)), side = "left", pad = " ")
   nbars_c    <- 30 - nbars  
   rep_bar    <- function(n, chr)  paste(rep(chr, n), collapse = "")
   rep_bar_n  <- function(ns, chr) sapply(ns, rep_bar, chr = chr)
   bar_left   <- rep_bar_n(nbars, chr = "\U25A0")
   bar_right  <- rep_bar_n(nbars_c, chr = "\U00B7")
-  nms        <- str_pad(sdf$names, width = max(nchar(sdf$names)), side = "right", pad = " ")
+  nms        <- str_pad(sdf$names, width = max(nchar(sdf$names)) + 1, side = "right", pad = " ")
   
   # table header
-  bar_text   <- str_pad("% most dominant value", width = 30, pad = " ", side = "both")
+  bar_text   <- str_pad("% Single dominant value", width = 30, pad = " ", side = "both")
   perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
-  num_text   <- str_pad("col", width = max(nchar(sdf$names)), pad = " ", side = "right")
-  val_text   <- str_pad("value", width = 6, pad = " ", side = "right")
+  num_text   <- str_pad("Column", width = max(nchar(sdf$names)), pad = " ", side = "right")
+  val_text   <- str_pad("Value",  width = 6, pad = " ", side = "right")
   cat(paste("     ", bar_text, " "), perc_text, num_text, val_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
   
   # table contents
   to_print   <- cbind("    \U2022 ", red(bar_left), silver(bar_right), 
-                      " \U2022", green(paste(" ", perc, nms, " (", sdf$value, ")", sep = "")), "\n")
+                      " \U2022", green(paste(" ", perc, nms, sdf$value, sep = "")), "\n")
   to_print   <- apply(to_print, 1, paste, collapse = "")
   for(i in 1:length(to_print)) cat(to_print[i])
-  
-
 }
 
 dot_bars_composition <- function(sdf, text = ""){
