@@ -8,6 +8,13 @@ dot_bars_na <- function(sdf, text = ""){
   rep_bar_n  <- function(ns, chr) sapply(ns, rep_bar, chr = chr)
   bar_left   <- rep_bar_n(nbars, chr = "\U25A0")
   bar_right  <- rep_bar_n(nbars_c, chr = "\U00B7")
+  
+  # table header
+  bar_text   <- str_pad("% column missing", width = 30, pad = " ", side = "both")
+  perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
+  num_text   <- "Column"
+  cat(paste("     ", bar_text, " "), perc_text, num_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
+  
   for(i in 1:length(sdf$prop)){
     cat("    \U2022 ")
     cat(red(bar_left[i]))
@@ -32,7 +39,7 @@ dot_bars_cor <- function(sdf, text = ""){
   # table header
   bar_text   <- str_pad("Absolute coefficient (|\U03C1|)", width = 30, pad = " ", side = "both")
   perc_text  <- str_pad("(\U03C1)", width = 6, pad = " ", side = "right")
-  num_text   <- str_pad("column pair", width = 4, pad = " ", side = "right")
+  num_text   <- str_pad("Column pair", width = 4, pad = " ", side = "right")
   cat(paste("     ", bar_text, " "), perc_text, num_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
   
   
@@ -79,6 +86,7 @@ dot_bars_imbalance <- function(sdf, text = ""){
   bar_left   <- rep_bar_n(nbars, chr = "\U25A0")
   bar_right  <- rep_bar_n(nbars_c, chr = "\U00B7")
   nms        <- str_pad(sdf$names, width = max(nchar(sdf$names)), side = "right", pad = " ")
+  
   # table header
   bar_text   <- str_pad("% most dominant value", width = 30, pad = " ", side = "both")
   perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
