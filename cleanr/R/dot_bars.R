@@ -45,16 +45,19 @@ dot_bars_space <- function(sdf, text = ""){
   nbars_c    <- 30 - nbars  
   rep_bar    <- function(n, chr)  paste(rep(chr, n), collapse = "")
   rep_bar_n  <- function(ns, chr) sapply(ns, rep_bar, chr = chr)
-  bar_left   <- rep_bar_n(nbars, chr = "\U25A0")
-  bar_right  <- rep_bar_n(nbars_c, chr = "\U00B7")
-  for(i in 1:length(sdf$prop)){
-    cat("    \U2022 ")
-    cat(red(bar_left[i]))
-    cat(silver(bar_right[i]))
-    cat(" \U2022")
-    cat(green(paste(" ", perc[i], sdf$names[i], sep = "")))
-    cat("\n")
-  }
+  bar_left   <- red(rep_bar_n(nbars, chr = "\U25A0"))
+  bar_right  <- silver(rep_bar_n(nbars_c, chr = "\U00B7"))
+  
+  # table header
+  bar_text   <- str_pad("% storage space", width = 30, pad = " ", side = "both")
+  perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
+  num_text   <- str_pad("(col)", width = 4, pad = " ", side = "right")
+  cat(paste("     ", bar_text, " "), perc_text, num_text, "\n", paste(rep("-", 56), collapse = ""), "\n")
+  
+  # table contents
+  to_print   <- cbind("    \U2022 ", bar_left, bar_right, " \U2022", green(paste(" ", perc, sdf$names, sep = "")), "\n")
+  to_print   <- apply(to_print, 1, paste, collapse = "")
+  for(i in 1:length(to_print)) cat(to_print[i])
 }
 
 dot_bars_imbalance <- function(sdf, text = ""){
