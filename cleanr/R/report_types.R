@@ -2,8 +2,9 @@
 report_types <- function(df){
   # perform basic column check on dataframe input
   check_df_cols(df)
+  
   # number of columns
-  ncl <- ncol(df)
+  ncl         <- ncol(df)
   # possible types to look out for
   type_spine  <- tibble(type = c("logical", "integer", "numeric", "character", 
                                  "factor",  "list",    "matrix",  "data.frame", 

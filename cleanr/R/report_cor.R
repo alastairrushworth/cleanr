@@ -1,8 +1,13 @@
 
 
 report_cor <- function(df, plots = F){
+  
   # perform basic column check on dataframe input
   check_df_cols(df)
+  
+  # print title text
+  console_title("Most correlated numeric pairs")
+  
   df_numeric <- df %>% select_if(is.numeric)
   if(ncol(df_numeric) > 0){
     if(plots){
@@ -20,8 +25,11 @@ report_cor <- function(df, plots = F){
       dplyr::arrange(desc(abs(cor))) %>%
       dplyr::mutate(pair = paste(X1, X2, sep = " & ")) %>%
       dplyr::select(-X1, -X2)
-    console_title("Most correlated numeric pairs")
     cor_df %>% dplyr::slice(1:10) %>% dot_bars_cor
+  } else {
+    cat(silver("    << Not applicable >>\n"))
   }
+  
+  # invisibly return the df for further summaries
   invisible(df)
 }
