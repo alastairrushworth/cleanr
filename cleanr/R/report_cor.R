@@ -16,7 +16,7 @@ report_cor <- function(df, plots = F){
         corrr::network_plot(min_cor = .0, legend = T) %>%
         print
     }
-    cor_num_mat <- cor(df_numeric, use = "pairwise.complete.obs")
+    cor_num_mat <- suppressWarnings(cor(df_numeric, use = "pairwise.complete.obs"))
     cor_num_mat[lower.tri(cor_num_mat, diag = T)] <- NA
     cor_df <- tibble::as.tibble(cor_num_mat)
     cor_df$X1 <- colnames(cor_df)
