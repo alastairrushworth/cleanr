@@ -113,11 +113,13 @@ dot_bars_composition <- function(sdf, text = ""){
   bar_left   <- rep_bar_n(predash, chr = "\U00B7")
   bar_mid    <- rep_bar_n(nbars, chr = "\U25A0")
   bar_right  <- rep_bar_n(postdash, chr = "\U00B7")
+  perc       <- str_pad(paste(round(sdf$prop * 100, 0), "% ", sep = ""), width = 4, side = "left", pad = " ")
   bar_text   <- str_pad("% of columns", width = 30, pad = " ", side = "both")
-  perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
-  num_text   <- str_pad("(#)", width = 2, pad = " ", side = "right")
+  perc_text  <- str_pad("(%)", width = max(nchar(perc))  - 1, pad = " ", side = "right")
+  num_text   <- str_pad("(#)", width = max(nchar(as.character(sdf$n))) + 2, pad = " ", side = "right")
+  type_text  <- "Type"
   cat(paste("     ", bar_text, "  "), perc_text, 
-      num_text, "type \n", "  ",
+      num_text,  type_text, "\n", "  ",
        paste(rep("-", 56), collapse = ""), "\n")
   for(i in 1:length(sdf$prop)){
     cat(paste("    \U2022 "))
@@ -125,9 +127,7 @@ dot_bars_composition <- function(sdf, text = ""){
     cat(red(bar_mid[i]))
     cat(silver(bar_right[i]))
     cat(paste(" \U2022"))
-    perc <- str_pad(paste(round(sdf$prop[i] * 100, 0), "% ", sep = ""), 
-                    width = 4, side = "left", pad = " ")
-    cat(green(paste("  ", perc, "(", sdf$n[i], ") ", text, sdf$type[i], sep = "")))
+    cat(green(paste("  ", perc[i], "(", sdf$n[i], ") ",  sdf$type[i], sep = "")))
     cat("\n")
   }
 }
