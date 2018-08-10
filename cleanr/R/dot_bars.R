@@ -65,9 +65,9 @@ dot_bars_space <- function(sdf, text = ""){
   bar_right  <- silver(rep_bar_n(nbars_c, chr = "\U00B7"))
   
   # table header
-  bar_text   <- str_pad("% storage space", width = 30, pad = " ", side = "both")
+  bar_text   <- str_pad("% of total data size", width = 30, pad = " ", side = "both")
   perc_text  <- str_pad("(%)", width = 3, pad = " ", side = "right")
-  num_text   <- str_pad("(col)", width = 4, pad = " ", side = "right")
+  num_text   <- str_pad("Column", width = 4, pad = " ", side = "right")
   cat(paste("     ", bar_text, " "), perc_text, num_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
   
   # table contents

@@ -24,7 +24,7 @@ report_space <- function(df){
   
   # title text
   title_text <- c(paste("Data has ", ncl, " cols and ", nrw, " rows, occupying ", sz, sep = ""),
-                  "Top columns listed by storage:") %>% console_title
+                  "Top columns in order of memory") %>% console_title
 
   # get top 10 largest columns by storage size, pass to the console histogrammer
   vec_to_tibble(col_space) %>% 
