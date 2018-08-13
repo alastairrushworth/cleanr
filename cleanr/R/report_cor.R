@@ -1,6 +1,6 @@
 
 
-report_cor <- function(df, plots = F){
+report_cor <- function(df, plots = F, top_n = 10){
   
   # perform basic column check on dataframe input
   check_df_cols(df)
@@ -25,7 +25,7 @@ report_cor <- function(df, plots = F){
       dplyr::arrange(desc(abs(cor))) %>%
       dplyr::mutate(pair = paste(X1, X2, sep = " & ")) %>%
       dplyr::select(-X1, -X2)
-    cor_df %>% dplyr::slice(1:10) %>% dot_bars_cor
+    cor_df %>% dplyr::slice(1:top_n) %>% dot_bars_cor
   } else {
     cat(silver("    << Not applicable >>\n"))
   }

@@ -1,4 +1,4 @@
-report_imbalance <- function(df){
+report_imbalance <- function(df, top_n = 10){
   
   # perform basic column check on dataframe input
   check_df_cols(df)
@@ -17,7 +17,7 @@ report_imbalance <- function(df){
   # get top ten most imbalance by common class and pass to histogrammer
   imb_cols %>% 
     arrange(desc(prop)) %>% 
-    slice(1:10) %>% 
+    slice(1:top_n) %>% 
     dot_bars_imbalance
   
   # invisibly return the df for further summaries

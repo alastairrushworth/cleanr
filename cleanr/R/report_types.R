@@ -1,5 +1,5 @@
 # types of the columns
-report_types <- function(df){
+report_types <- function(df, top_n = 10){
   # perform basic column check on dataframe input
   check_df_cols(df)
   

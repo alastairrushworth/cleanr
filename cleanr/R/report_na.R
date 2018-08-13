@@ -1,5 +1,5 @@
 # find columns with missing values
-report_na <- function(df){
+report_na <- function(df, top_n = 10){
   # perform basic column check on dataframe input
   check_df_cols(df)
   
@@ -11,7 +11,7 @@ report_na <- function(df){
     mutate(prop = n / nrow(df)) %>%
     filter(prop > 0) %>%  
     arrange(desc(prop)) %>%
-    slice(1:10) 
+    slice(1:top_n) 
   
   # if there is anything to print, else sensible message
   if(nrow(df_summary) > 0){

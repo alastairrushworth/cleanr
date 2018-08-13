@@ -4,6 +4,6 @@
 .Ruserdata
 example.R
 cleanr.Rproj
-src/*.o
-src/*.so
-src/*.dll
+cleanr/src/*.o
+cleanr/src/*.so
+cleanr/src/*.dll
