@@ -5,6 +5,28 @@
 
 using namespace Rcpp;
 
+// count_levels_num
+IntegerVector count_levels_num(NumericVector x);
+RcppExport SEXP _cleanr_count_levels_num(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_levels_num(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// count_levels_char
+IntegerVector count_levels_char(CharacterVector x);
+RcppExport SEXP _cleanr_count_levels_char(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(count_levels_char(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // na_numeric
 int na_numeric(NumericVector x);
 RcppExport SEXP _cleanr_na_numeric(SEXP xSEXP) {
@@ -51,6 +73,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_cleanr_count_levels_num", (DL_FUNC) &_cleanr_count_levels_num, 1},
+    {"_cleanr_count_levels_char", (DL_FUNC) &_cleanr_count_levels_char, 1},
     {"_cleanr_na_numeric", (DL_FUNC) &_cleanr_na_numeric, 1},
     {"_cleanr_na_character", (DL_FUNC) &_cleanr_na_character, 1},
     {"_cleanr_na_logical", (DL_FUNC) &_cleanr_na_logical, 1},

@@ -6,9 +6,9 @@ report_imbalance <- function(df, top_n = 10){
   # exclude columns containing lists
   not_list <- function(v) !is.list(v)  
   gdf      <- df %>% select_if(not_list)
-  
+  cnames   <- colnames(gdf)
   # function to find the percentage of the most common value in a vector
-  imb_cols       <- do.call("rbind", lapply(gdf, get_most_common_value))
+  imb_cols       <- do.call("rbind", lapply(gdf, fast_table))
   imb_cols$names <- colnames(gdf)
   
   # print console title text

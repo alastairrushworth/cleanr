@@ -1,6 +1,13 @@
-get_most_common_value <- function(v){
-  x   <- rev(sort(table(v)))[1] / length(v)
-  xdf <- vec_to_tibble(x)
-  colnames(xdf) <- c("value", "prop")
-  return(xdf)
+fast_table <- function(v){
+  vsort  <- sort(v, method = "quick")
+  vals   <- unique(vsort)
+  if(any(class(v) %in% c("integer", "numeric", "double", "factor"))){
+    freq   <- count_levels_num(vsort)
+  } 
+  if(any(class(v) %in% c("character"))){
+    freq   <- count_levels_char(vsort)
+  } 
+  tibble(value = vals, prop = freq / length(v)) %>% 
+    arrange(desc(prop)) %>% slice(1)
 }
+

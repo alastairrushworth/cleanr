@@ -8,7 +8,7 @@ int na_numeric(NumericVector x) {
   int na_count = 0;
   for(int i = 0; i < n; i++){
     // na_count = na_count + NumericVector::is_na(x[i]);
-    na_count = na_count + R_IsNA(x[i]);
+    na_count = na_count + NumericVector::is_na(x[i]);
   }
   return(na_count);
 }
