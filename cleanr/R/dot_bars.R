@@ -25,6 +25,35 @@ dot_bars_na <- function(sdf, text = ""){
   }
 }
 
+dot_bars_ass <- function(sdf, text = ""){
+  total_bars <- 30 
+  nbars      <- round(abs(sdf$ass) * total_bars, 0)
+  nbars_c    <- 30 - nbars  
+  rep_bar    <- function(n, chr)  paste(rep(chr, n), collapse = "")
+  rep_bar_n  <- function(ns, chr) sapply(ns, rep_bar, chr = chr)
+  bar_left   <- rep_bar_n(nbars, chr = "\U25A0")
+  bar_right  <- rep_bar_n(nbars_c, chr = "\U00B7")
+  cor_vals   <- str_pad(as.character(format(round(sdf$ass, 3)), nsmall = 3), width = 5, side = "right", pad = " ")
+  
+  # table header
+  bar_text   <- str_pad("Goodman and Kruskal's tau", width = 30, pad = " ", side = "both")
+  perc_text  <- str_pad("(\U03C4)", width = 6, pad = " ", side = "right")
+  num_text   <- str_pad("Column pair", width = 4, pad = " ", side = "right")
+  cat(paste("     ", bar_text, " "), perc_text, num_text, "\n   ", paste(rep("-", 56), collapse = ""), "\n")
+  
+  
+  
+  for(i in 1:length(cor_vals)){
+    cat("    \U2022 ")
+    cat(red(bar_left[i]))
+    cat(silver(bar_right[i]))
+    cat(" \U2022")
+    cat(green(paste(" ", cor_vals[i], " ", sdf$pair[i], sep = "")))
+    cat("\n")
+  }
+}
+
+
 dot_bars_cor <- function(sdf, text = ""){
   total_bars <- 30 
   nbars      <- round(abs(sdf$cor) * total_bars, 0)

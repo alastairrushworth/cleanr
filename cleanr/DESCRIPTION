@@ -8,5 +8,5 @@ Description: Tools to explore large and messy data frames.
 LinkingTo: Rcpp
 LazyLoad: yes
 ByteCompile: yes
-Depends: R (>= 3.1.0), corrr, crayon, dplyr, magrittr, pryr, Rcpp, stringr, tibble, tidyr
+Depends: R (>= 3.1.0), corrr, crayon, dplyr, GoodmanKruskal, magrittr, pryr, Rcpp, stringr, tibble, tidyr
 License: GPL-2
