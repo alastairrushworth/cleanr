@@ -8,7 +8,13 @@ report_cor <- function(df, plots = F, top_n = 10){
   # print title text
   console_title("Most correlated numeric pairs")
   
+  # filter to only the numeric variables
   df_numeric <- df %>% select_if(is.numeric)
+  
+  # remove anything that is constant
+  df_numeric <- df_numeric %>% select(-which(sapply(df_numeric, sd) == 0))
+  
+  # calculate correlation coefficients
   if(ncol(df_numeric) > 0){
     if(plots){
       df_numeric %>% 
