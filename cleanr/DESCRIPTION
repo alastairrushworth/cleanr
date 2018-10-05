@@ -1,10 +1,10 @@
 Package: cleanr
-Title: Explore and Preprocess Data Frames
-Version: 0.1
-Date: 2018-08-10
+Title: Explore and Preprocess Data Frames for Predictive Modelling
+Version: 0.1.1
+Date: 2018-10-05
 Authors@R: person("Alastair", "Rushworth", email = "alastairmrushworth@gmail.com",
                   role = c("aut", "cre"))
-Description: Tools to explore large and messy data frames.  
+Description: Tools to explore and tidy up large and messy data frames.  
 LinkingTo: Rcpp
 LazyLoad: yes
 ByteCompile: yes
