@@ -20,8 +20,7 @@ drop_cor<- function(df, abs_cor = 1, verbose = T){
       dplyr::filter(abs(cor) >= abs_cor)
     if(nrow(cor_df) >= 1){
       names_to_drop <- sort(unique(cor_df$X1))
-      cat("Constant columns dropped:\n ")
-      cat(paste("\U2022 ", names_to_drop, " \n", sep = ""))
+      column_drop_console(names_to_drop = names_to_drop, type = "Correlated columns dropped")
       # actually drop these columns
       df <- df %>% select(-names_to_drop)
     } else {

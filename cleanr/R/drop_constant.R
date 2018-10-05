@@ -27,8 +27,7 @@ drop_constant <- function(df, verbose = T){
   if(verbose){
     if(length(drop_cols) > 1){
       names_to_drop <- sort(unique(names(df)[drop_cols]))
-      cat("Constant columns dropped:\n ")
-      cat(paste("\U2022 ", names_to_drop, " \n", sep = ""))
+      column_drop_console(names_to_drop = names_to_drop, type = "Constant columns dropped")
       df <- df %>% select(-drop_cols)
     } else {
       cat("No constant columns found.\n ")
