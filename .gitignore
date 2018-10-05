@@ -7,3 +7,4 @@ cleanr.Rproj
 cleanr/src/*.o
 cleanr/src/*.so
 cleanr/src/*.dll
+plan.R
