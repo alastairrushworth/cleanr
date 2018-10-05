@@ -24,10 +24,10 @@ drop_cor<- function(df, abs_cor = 1, verbose = T){
       # actually drop these columns
       df <- df %>% select(-names_to_drop)
     } else {
-      cat("No highly correlated columns to remove. \n")
+      column_drop_console(type = "Correlated columns dropped")
     }
   } else {
-    cat("No highly correlated columns to remove. \n")
+    column_drop_console(type = "Correlated columns dropped")
   }
   
   # invisibly return the df for further summaries

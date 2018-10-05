@@ -30,7 +30,7 @@ drop_constant <- function(df, verbose = T){
       column_drop_console(names_to_drop = names_to_drop, type = "Constant columns dropped")
       df <- df %>% select(-drop_cols)
     } else {
-      cat("No constant columns found.\n ")
+      column_drop_console(type = "Constant columns dropped")
     }
   }
   

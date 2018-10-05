@@ -22,10 +22,10 @@ drop_imbalance <- function(df, max_imbalance = 0.99, include_numeric = F, verbos
       # actually drop these columns
       df <- df %>% select(-names_to_drop)
     } else {
-      cat("No highly imbalance features found. \n")
+      column_drop_console(type = "Imbalanced columns dropped")
     }
   } else {
-    cat("No highly imbalance features found. \n")
+    column_drop_console(type = "Imbalanced columns dropped")
   }
   
   # invisibly return the df for further summaries
