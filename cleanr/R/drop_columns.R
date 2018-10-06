@@ -1,4 +1,4 @@
-drop <- function(df, top_n = 10){
+drop_columns <- function(df, top_n = 10){
   df %>%
     drop_constant(verbose = T) %>%
     drop_cor(abs_cor = 1, verbose = T) %>% 
