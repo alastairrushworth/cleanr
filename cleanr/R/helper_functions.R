@@ -8,6 +8,7 @@ fast_table <- function(v){
     freq   <- count_levels_char(vsort)
   } 
   tibble(value = vals, prop = freq / length(v)) %>% 
-    arrange(desc(prop)) %>% slice(1)
+    dplyr::arrange(desc(prop)) %>% 
+    dplyr::slice(1)
 }
 

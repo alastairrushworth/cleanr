@@ -28,9 +28,9 @@ report_space <- function(df, top_n = 10){
 
   # get top 10 largest columns by storage size, pass to the console histogrammer
   vec_to_tibble(col_space) %>% 
-    mutate(prop = n / sum(n)) %>%
-    arrange(desc(n)) %>%
-    slice(1:top_n) %>%
+    dplyr::mutate(prop = n / sum(n)) %>%
+    dplyr::arrange(desc(n)) %>%
+    dplyr::slice(1:top_n) %>%
     dot_bars_space
   
   # invisibly return the df for further summaries

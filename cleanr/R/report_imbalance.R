@@ -10,7 +10,8 @@ report_imbalance <- function(df, top_n = 10, include_numeric = F){
   col_exclude <- ifelse(include_numeric, 
                         function(v) !is.list(v), 
                         function(v) !(is.list(v) | is.numeric(v))) 
-  gdf         <- df %>% select_if(col_exclude)
+  gdf         <- df %>% 
+    dplyr::select_if(col_exclude)
   if(ncol(gdf) > 0){
     cnames      <- colnames(gdf)
     # function to find the percentage of the most common value in a vector
@@ -19,8 +20,8 @@ report_imbalance <- function(df, top_n = 10, include_numeric = F){
     
     # get top ten most imbalance by common class and pass to histogrammer
     imb_cols %>% 
-      arrange(desc(prop)) %>% 
-      slice(1:top_n) %>% 
+      dplyr::arrange(desc(prop)) %>% 
+      dplyr::slice(1:top_n) %>% 
       dot_bars_imbalance
   } else {
     cat(silver("    << Not applicable >>\n"))

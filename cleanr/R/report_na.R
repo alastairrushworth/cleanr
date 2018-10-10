@@ -8,10 +8,10 @@ report_na <- function(df, top_n = 10){
   
   # find the top 10 with most missingness
   df_summary <- vec_to_tibble(sapply(df, sumna)) %>%
-    mutate(prop = n / nrow(df)) %>%
-    filter(prop > 0) %>%  
-    arrange(desc(prop)) %>%
-    slice(1:top_n) 
+    dplyr::mutate(prop = n / nrow(df)) %>%
+    dplyr::filter(prop > 0) %>%  
+    dplyr::arrange(desc(prop)) %>%
+    dplyr::slice(1:top_n) 
   
   # if there is anything to print, else sensible message
   if(nrow(df_summary) > 0){

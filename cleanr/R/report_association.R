@@ -9,7 +9,7 @@ report_association <- function(df, plots = F, top_n = 10){
   df_cat <- df %>% 
     select_if(function(v) is.character(v) | is.factor(v)) %>% 
     as.data.frame
-  if(ncol(df_cat) > 0){
+  if(ncol(df_cat) > 1){
     GKMat <- GoodmanKruskal::GKtauDataframe(df_cat)
     if(plots) GKMat %>% plot
     ass_mat <- GKMat
