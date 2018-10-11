@@ -1,4 +1,4 @@
-fit_lgbm <- function(df, label = NULL, valid_prop = NULL, ...){
+fit_lgbm <- function(df, label = NULL, ...){
   
   # check that lightgbm is available
   if (!requireNamespace("lightgbm", quietly = TRUE)) {
@@ -17,17 +17,18 @@ fit_lgbm <- function(df, label = NULL, valid_prop = NULL, ...){
   rules <- dftrain$rules
   dftrain <- as.matrix(dftrain$data)
   
-  # split into validation set and train 
-  if(!is.null(valid_prop)){
-    train_inds <- sample(1:nrow(dftrain), round(valid_prop * nrow(dftrain), 0))
-    valids  <- list(test = lgb.Dataset(data = dftrain[train_inds,  ], label = label_vec[train_inds]))
-    dftrain <- lightgbm::lgb.Dataset(data = dftrain[-train_inds, ], label = label_vec[-train_inds])
-    model <- lightgbm::lgb.train(data = dftrain, valids = valids,...)
-  } else {
-    dftrain <- lightgbm::lgb.Dataset(data = dftrain, label = label_vec)
-    model <- lightgbm::lgb.train(data = dftrain,...)
-  }
+  # perform cross validation
+  dftrain <- lightgbm::lgb.Dataset(data = dftrain, label = label_vec)
+  modelcv <- lightgbm::lgb.cv(data = dftrain, early_stopping_rounds = 50, ...)# objective = "binary", nfold = 10, nrounds = 100)
+  niter <- length(modelcv$record_evals$valid$binary_logloss$eval)
+  nrounds <- ifelse(modelcv$best_iter == -1, niter, modelcv$best_iter)
   
+  # train the model for the best number of its
+  a     <- list(...)
+  a$nrounds <- nrounds
+  a$data <- dftrain
+  model <- do.call(lgb.train, a)
+
   # output
   out_list <- list(model = model, rules = rules, label = label)
 }
