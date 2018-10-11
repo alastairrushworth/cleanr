@@ -3,8 +3,12 @@
 .RData
 .Ruserdata
 example.R
+plan.R
+.DS_Store
 cleanr.Rproj
 cleanr/src/*.o
 cleanr/src/*.so
 cleanr/src/*.dll
-plan.R
+data/*
+tests/*
+

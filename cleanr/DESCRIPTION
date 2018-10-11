@@ -9,4 +9,5 @@ LinkingTo: Rcpp
 LazyLoad: yes
 ByteCompile: yes
 Depends: R (>= 3.1.0), corrr, crayon, dplyr, GoodmanKruskal, magrittr, pryr, Rcpp, stringr, tibble, tidyr
+Suggests: lightgbm
 License: GPL-2
