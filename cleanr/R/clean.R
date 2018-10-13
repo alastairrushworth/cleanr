@@ -9,8 +9,8 @@
 
 
 clean <- function(df, factors_convert = T, column_names = T,
-                  rownames_column = T, 
-                  column_alpha = T, na_impute = NULL){
+                  rownames_column = T, column_alpha = T,
+                  fix_numeric = T, na_impute = NULL){
   
   # perform basic column check on dataframe input
   check_df_cols(df)
@@ -26,7 +26,7 @@ clean <- function(df, factors_convert = T, column_names = T,
   # factors to strings
   if(factors_convert){
     df %<>% mutate_if(is.factor, as.character)
-  }   
+  } 
   
   # colnames to lower, remove dots and space, ensure uniqueness
   if(column_names){
@@ -41,13 +41,10 @@ clean <- function(df, factors_convert = T, column_names = T,
     df %<>% select(sort(colnames(.)))
   }
   
-  # use 
+  # convert to a tibble
+  df %<>% as.tibble
   
-  # condense column names
-  # if(condense_names){
-  #   
-  # }
-
+  # invisibly return the df for further summaries
   invisible(df)
 }
 
