@@ -1,8 +1,4 @@
 
-library(timeDate)
-library(chron)
-
-
 add_time_features <- function(df, holidays = "US", lag_stuff = NULL){
   # perform basic column check on dataframe input
   check_df_cols(df)
