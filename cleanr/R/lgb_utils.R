@@ -19,7 +19,7 @@ fit_lgbm <- function(df, label = NULL, ...){
   
   # perform cross validation
   dftrain <- lightgbm::lgb.Dataset(data = dftrain, label = label_vec)
-  modelcv <- lightgbm::lgb.cv(data = dftrain, early_stopping_rounds = 50, ...)# objective = "binary", nfold = 10, nrounds = 100)
+  modelcv <- lightgbm::lgb.cv(data = dftrain, early_stopping_rounds = 100, nfold = 20,...)# objective = "binary", nfold = 10, nrounds = 100)
   niter <- length(modelcv$record_evals$valid$binary_logloss$eval)
   nrounds <- ifelse(modelcv$best_iter == -1, niter, modelcv$best_iter)
   
