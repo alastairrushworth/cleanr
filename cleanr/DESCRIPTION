@@ -8,6 +8,6 @@ Description: Tools to explore and tidy up large and messy data frames.
 LinkingTo: Rcpp
 LazyLoad: yes
 ByteCompile: yes
-Depends: R (>= 3.1.0), corrr, crayon, dplyr, GoodmanKruskal, magrittr, pryr, Rcpp, stringr, tibble, tidyr
+Depends: R (>= 3.1.0), chron, corrr, crayon, dplyr, GoodmanKruskal, magrittr, pryr, Rcpp, stringr, tibble, tidyr, timeDate
 Suggests: lightgbm
 License: GPL-2
